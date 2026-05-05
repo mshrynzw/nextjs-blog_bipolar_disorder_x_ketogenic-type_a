@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>双極症とケトジェニック | 当事者の記録ブログ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Noto Serif JP', 'serif'],
+            sans: ['Noto Sans JP', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .font-serif { font-family: 'Noto Serif JP', serif; }
+    .hero-gradient {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 30%, #f0f9ff 70%, #f8fafc 100%);
+    }
+    .card-hover {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #16a34a;
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .leaf-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.04'%3E%3Cpath d='M30 0C13.43 0 0 13.43 0 30s13.43 30 30 30 30-13.43 30-30S46.57 0 30 0zm0 4c14.36 0 26 11.64 26 26S44.36 56 30 56 4 44.36 4 30 15.64 4 30 4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-gray-800 antialiased">
+
+  <!-- ヘッダー -->
+  <header class="bg-white/90 backdrop-blur-sm border-b border-stone-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        <!-- サイト名 -->
+        <a href="index.html" class="flex items-center gap-2 group" aria-label="トップへ">
+          <span class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">双</span>
+          <span class="font-serif text-base sm:text-lg font-semibold text-gray-900 leading-tight">双極症とケトジェニック</span>
+        </a>
+
+        <!-- PCナビ -->
+        <nav class="hidden md:flex items-center gap-8" aria-label="グローバルナビゲーション">
+          <a href="index.html" class="nav-link text-sm font-medium text-green-700 font-bold">Home</a>
+          <a href="blog-list.html" class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900">Blog</a>
+          <a href="about.html" class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900">About</a>
+        </nav>
+
+        <!-- PC検索 -->
+        <div class="hidden md:flex items-center gap-2">
+          <div class="relative">
+            <label for="header-search" class="sr-only">記事を検索</label>
+            <input id="header-search" type="search" placeholder="記事を検索..."
+              class="w-52 pl-9 pr-4 py-2 text-sm bg-stone-100 border border-stone-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white transition" />
+            <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+        </div>
+
+        <!-- ハンバーガー（モバイル） -->
+        <button id="menu-btn" class="md:hidden p-2 rounded-lg hover:bg-stone-100 transition" aria-label="メニューを開く" aria-expanded="false">
+          <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+
+      <!-- モバイルメニュー -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-stone-100 mt-2 pt-4">
+        <div class="relative mb-4">
+          <label for="mobile-search" class="sr-only">記事を検索</label>
+          <input id="mobile-search" type="search" placeholder="記事を検索..."
+            class="w-full pl-9 pr-4 py-2.5 text-sm bg-stone-100 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 transition" />
+          <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <nav class="flex flex-col gap-1" aria-label="モバイルナビゲーション">
+          <a href="index.html" class="px-3 py-2 rounded-lg text-sm font-medium text-green-700 bg-green-50">Home</a>
+          <a href="blog-list.html" class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-stone-100">Blog</a>
+          <a href="about.html" class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-stone-100">About</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ヒーローセクション -->
+    <section class="hero-gradient leaf-pattern relative overflow-hidden" aria-labelledby="hero-heading">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-10 right-10 w-64 h-64 rounded-full bg-green-100/50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-20 w-80 h-80 rounded-full bg-sky-100/40 blur-3xl"></div>
+      </div>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28 relative">
+        <div class="max-w-2xl">
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-green-700 bg-green-100 px-3 py-1.5 rounded-full mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+            当事者による実体験の記録
+          </span>
+          <h1 id="hero-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            双極症の当事者が<br class="hidden sm:block" />
+            ケトジェニックを試している<br class="hidden sm:block" />
+            <span class="text-green-700">様子をお伝えするブログ</span>
+          </h1>
+          <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-8 max-w-xl">
+            双極性障害と向き合いながら、食事療法（ケトジェニックダイエット）を実践する日々のリアルな記録です。同じ悩みを持つ方の参考になれば嬉しいです。
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="blog-list.html" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-6 py-3 rounded-xl transition shadow-sm hover:shadow-md">
+              ブログを読む
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="about.html" class="inline-flex items-center gap-2 bg-white hover:bg-stone-50 text-gray-700 text-sm font-medium px-6 py-3 rounded-xl border border-stone-200 transition shadow-sm">
+              このブログについて
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 統計バッジ -->
+      <div class="border-t border-stone-200/60 bg-white/60 backdrop-blur-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+          <div class="flex flex-wrap items-center gap-6 sm:gap-10 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>記事 <strong class="text-gray-900">48</strong> 本</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>開始から <strong class="text-gray-900">8ヶ月</strong></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              <span>毎週更新中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 最新記事 -->
+    <section class="py-16 sm:py-20 bg-stone-50" aria-labelledby="recent-heading">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between mb-10">
+          <div>
+            <h2 id="recent-heading" class="font-serif text-2xl sm:text-3xl font-bold text-gray-900">最近のブログ記事</h2>
+            <p class="mt-1 text-sm text-gray-500">日々の実践記録をお届けします</p>
+          </div>
+          <a href="blog-list.html" class="hidden sm:inline-flex items-center gap-1 text-sm text-green-700 font-medium hover:text-green-800 transition">
+            すべて見る
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- 記事グリッド -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- 記事カード 1（フィーチャード） -->
+          <article class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden card-hover" aria-label="記事: ケトジェニック8ヶ月の振り返り">
+            <div class="bg-gradient-to-br from-green-50 to-emerald-100 h-48 flex items-center justify-center">
+              <div class="text-center px-6">
+                <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center mx-auto mb-3">
+                  <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                </div>
+                <span class="text-green-700 text-sm font-medium">8ヶ月の振り返り</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="inline-flex items-center text-xs font-medium text-green-700 bg-green-50 border border-green-200 px-2.5 py-1 rounded-full">振り返り</span>
+                <span class="inline-flex items-center text-xs text-gray-400 bg-stone-100 px-2.5 py-1 rounded-full">#体重変化</span>
+                <span class="inline-flex items-center text-xs text-gray-400 bg-stone-100 px-2.5 py-1 rounded-full">#気分の波</span>
+                <time class="ml-auto text-xs text-gray-400" datetime="2025-05-01">2025年5月1日</time>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-gray-900 mb-3 leading-snug hover:text-green-700 transition">
+                <a href="blog-detail.html">ケトジェニック8ヶ月経過——双極症の症状は変わったのか正直に記録する</a>
+              </h3>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                開始から8ヶ月が経ちました。体重の変化、気分の波、薬との兼ね合いなど、良いことも悪いことも包み隠さずお伝えします。特に躁転のリスクについては慎重に経過を見てきました。
+              </p>
+              <a href="blog-detail.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-green-700 hover:text-green-800 transition group">
+                続きを読む
+                <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- 記事カード 2 -->
+          <article class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden card-hover" aria-label="記事: 鬱期の食事記録">
+            <div class="bg-gradient-to-br from-sky-50 to-blue-100 h-32 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center">
+                <svg class="w-6 h-6 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="text-xs font-medium text-sky-700 bg-sky-50 border border-sky-200 px-2.5 py-1 rounded-full">食事記録</span>
+                <time class="ml-auto text-xs text-gray-400" datetime="2025-04-22">4月22日</time>
+              </div>
+              <h3 class="font-serif text-base font-bold text-gray-900 mb-2 leading-snug hover:text-green-700 transition">
+                <a href="blog-detail.html">鬱期でも続けられたケトジェニックの工夫3つ</a>
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                気力が落ちている時期でも食事を崩さないためにやっていること。シンプルさを極めたレシピと準備のコツ。
+              </p>
+              <div class="flex flex-wrap gap-1 mb-4">
+                <span class="text-xs text-gray-400 bg-stone-100 px-2 py-0.5 rounded-full">#鬱期</span>
+                <span class="text-xs text-gray-400 bg-stone-100 px-2 py-0.5 rounded-full">#食事準備</span>
+              </div>
+              <a href="blog-detail.html" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:text-green-800 transition group">
+                続きを読む <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- 記事カード 3 -->
+          <article class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden card-hover" aria-label="記事: 主治医との対話">
+            <div class="bg-gradient-to-br from-amber-50 to-orange-100 h-32 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center">
+                <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full">医師との対話</span>
+                <time class="ml-auto text-xs text-gray-400" datetime="2025-04-15">4月15日</time>
+              </div>
+              <h3 class="font-serif text-base font-bold text-gray-900 mb-2 leading-snug hover:text-green-700 transition">
+                <a href="blog-detail.html">主治医にケトジェニックを話したらどう反応されたか</a>
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                精神科の主治医にケトジェニックを実践していると告げた時のリアルなやり取り。医師との関係性を壊さずに進める方法。
+              </p>
+              <div class="flex flex-wrap gap-1 mb-4">
+                <span class="text-xs text-gray-400 bg-stone-100 px-2 py-0.5 rounded-full">#医療</span>
+                <span class="text-xs text-gray-400 bg-stone-100 px-2 py-0.5 rounded-full">#主治医</span>
+              </div>
+              <a href="blog-detail.html" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:text-green-800 transition group">
+                続きを読む <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- 記事カード 4 -->
+          <article class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden card-hover" aria-label="記事: 糖質制限と睡眠">
+            <div class="bg-gradient-to-br from-violet-50 to-purple-100 h-32 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center">
+                <svg class="w-6 h-6 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="text-xs font-medium text-violet-700 bg-violet-50 border border-violet-200 px-2.5 py-1 rounded-full">睡眠・体調</span>
+                <time class="ml-auto text-xs text-gray-400" datetime="2025-04-08">4月8日</time>
+              </div>
+              <h3 class="font-serif text-base font-bold text-gray-900 mb-2 leading-snug hover:text-green-700 transition">
+                <a href="blog-detail.html">糖質制限を始めて睡眠の質が変わった話——データで見る90日間</a>
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                スマートウォッチで睡眠を計測し続けた90日分のデータを公開。深睡眠の割合が目に見えて変化した時期とその理由の考察。
+              </p>
+              <div class="flex flex-wrap gap-1 mb-4">
+                <span class="text-xs text-gray-400 bg-stone-100 px-2 py-0.5 rounded-full">#睡眠</span>
+                <span class="text-xs text-gray-400 bg-stone-100 px-2 py-0.5 rounded-full">#データ記録</span>
+              </div>
+              <a href="blog-detail.html" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:text-green-800 transition group">
+                続きを読む <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- すべて見るボタン（モバイル） -->
+        <div class="mt-8 text-center sm:hidden">
+          <a href="blog-list.html" class="inline-flex items-center gap-2 text-sm font-medium text-green-700 border border-green-300 bg-white px-5 py-2.5 rounded-xl hover:bg-green-50 transition">
+            すべての記事を見る
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- カテゴリセクション -->
+    <section class="py-14 bg-white border-t border-stone-100" aria-labelledby="categories-heading">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 id="categories-heading" class="font-serif text-xl sm:text-2xl font-bold text-gray-900 mb-8 text-center">カテゴリから探す</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <a href="blog-list.html" class="group flex flex-col items-center gap-2 p-4 rounded-2xl border border-stone-100 bg-stone-50 hover:bg-green-50 hover:border-green-200 transition text-center">
+            <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:bg-green-100 transition">
+              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-700">振り返り</span>
+          </a>
+          <a href="blog-list.html" class="group flex flex-col items-center gap-2 p-4 rounded-2xl border border-stone-100 bg-stone-50 hover:bg-sky-50 hover:border-sky-200 transition text-center">
+            <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:bg-sky-100 transition">
+              <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-700">食事記録</span>
+          </a>
+          <a href="blog-list.html" class="group flex flex-col items-center gap-2 p-4 rounded-2xl border border-stone-100 bg-stone-50 hover:bg-amber-50 hover:border-amber-200 transition text-center">
+            <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:bg-amber-100 transition">
+              <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-700">医師との対話</span>
+          </a>
+          <a href="blog-list.html" class="group flex flex-col items-center gap-2 p-4 rounded-2xl border border-stone-100 bg-stone-50 hover:bg-violet-50 hover:border-violet-200 transition text-center">
+            <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:bg-violet-100 transition">
+              <svg class="w-5 h-5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-700">睡眠・体調</span>
+          </a>
+          <a href="blog-list.html" class="group flex flex-col items-center gap-2 p-4 rounded-2xl border border-stone-100 bg-stone-50 hover:bg-rose-50 hover:border-rose-200 transition text-center">
+            <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:bg-rose-100 transition">
+              <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-700">メンタル記録</span>
+          </a>
+          <a href="blog-list.html" class="group flex flex-col items-center gap-2 p-4 rounded-2xl border border-stone-100 bg-stone-50 hover:bg-emerald-50 hover:border-emerald-200 transition text-center">
+            <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:bg-emerald-100 transition">
+              <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-700">参考文献</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 免責事項バナー -->
+    <section class="bg-amber-50 border-y border-amber-200 py-4" aria-label="免責事項">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <p class="text-xs text-amber-800 leading-relaxed text-center">
+          <svg class="w-3.5 h-3.5 inline mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          このブログは当事者の個人的な体験記録です。医療アドバイスではありません。病状の変化は必ず主治医にご相談ください。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="bg-gray-900 text-gray-400">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="text-center sm:text-left">
+          <div class="flex items-center gap-2 justify-center sm:justify-start mb-1">
+            <span class="w-7 h-7 rounded-full bg-green-600 flex items-center justify-center text-white text-xs font-bold">双</span>
+            <span class="font-serif text-white font-semibold text-sm">双極症とケトジェニック</span>
+          </div>
+          <p class="text-xs">当事者による実体験の記録ブログ</p>
+        </div>
+        <nav class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm" aria-label="フッターナビゲーション">
+          <a href="index.html" class="hover:text-white transition">Home</a>
+          <a href="blog-list.html" class="hover:text-white transition">Blog</a>
+          <a href="about.html" class="hover:text-white transition">About</a>
+          <a href="about.html#privacy" class="hover:text-white transition">プライバシー</a>
+          <a href="about.html#contact" class="hover:text-white transition">お問い合わせ</a>
+        </nav>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-6 text-center text-xs">
+        <p>© 2025 双極症とケトジェニック. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', !open);
+    });
+  </script>
+</body>
+</html>
