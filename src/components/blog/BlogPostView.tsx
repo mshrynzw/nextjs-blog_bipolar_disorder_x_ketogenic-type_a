@@ -2,14 +2,7 @@ import Link from "next/link";
 import type { Post, PostListItem } from "@/src/lib/posts";
 import { absoluteUrl } from "@/src/lib/site";
 import { CopyPostUrlButton } from "@/src/components/blog/CopyPostUrlButton";
-
-function formatPublishedDate(iso: string): string {
-  const d = new Date(iso);
-  return new Intl.DateTimeFormat("ja-JP", {
-    dateStyle: "long",
-    timeZone: "Asia/Tokyo",
-  }).format(d);
-}
+import { formatPostCardDate } from "@/src/lib/dateFormat";
 
 export default function BlogPostView({
   post,
@@ -117,7 +110,7 @@ export default function BlogPostView({
                     />
                   </svg>
                   <time dateTime={frontmatter.publishedAt}>
-                    {formatPublishedDate(frontmatter.publishedAt)}
+                    {formatPostCardDate(frontmatter.publishedAt)}
                   </time>
                 </div>
                 <div className="flex items-center gap-1">
@@ -281,7 +274,7 @@ export default function BlogPostView({
                           {r.genre}
                         </span>
                         <time className="text-xs text-gray-400 ml-auto">
-                          {formatPublishedDate(r.publishedAt)}
+                          {formatPostCardDate(r.publishedAt)}
                         </time>
                       </div>
                       <h3 className="font-kosugi-maru text-sm font-bold text-gray-900 mb-2 hover:text-green-700 transition leading-snug">

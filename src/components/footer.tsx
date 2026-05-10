@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="bg-gray-900 text-gray-400">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="text-center sm:text-left">
+          <Link href="/" className="text-center sm:text-left">
             <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
               <Image
                 src="/images/logo.webp"
@@ -24,7 +24,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-xs">当事者による実体験の記録ブログ</p>
-          </div>
+          </Link>
           <nav
             className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm"
             aria-label="フッターナビゲーション"
