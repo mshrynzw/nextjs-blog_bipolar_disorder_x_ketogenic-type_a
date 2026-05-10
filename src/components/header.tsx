@@ -12,8 +12,8 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* サイト名 */}
-          <a
-            href="index.html"
+          <Link
+            href="/"
             className="flex items-center gap-2 group"
             aria-label="トップへ"
           >
@@ -26,7 +26,7 @@ export default function Header() {
             <span className="font-kosugi-maru text-base sm:text-lg font-semibold text-white leading-tight">
               双極症とケトジェニック
             </span>
-          </a>
+          </Link>
 
           {/* PCナビ */}
           <nav
@@ -53,23 +53,26 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* PC検索 */}
+          {/* PC検索 → /blog-list?q= （一覧のキーワード OR 検索と同じ） */}
           <div className="hidden md:flex items-center gap-2">
-            <div className="relative">
+            <form action="/blog-list" method="get" className="relative">
               <label htmlFor="header-search" className="sr-only">
                 記事を検索
               </label>
               <input
                 id="header-search"
+                name="q"
                 type="search"
-                placeholder="記事を検索..."
-                className="w-52 pl-9 pr-4 py-2 text-sm bg-stone-100 border border-stone-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white transition"
+                placeholder="記事を検索…（スペース区切りで OR）"
+                autoComplete="off"
+                className="w-52 pl-9 pr-4 py-2 text-sm bg-stone-100 border border-stone-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white transition text-gray-900"
               />
               <svg
-                className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden
               >
                 <path
                   strokeLinecap="round"
@@ -78,7 +81,7 @@ export default function Header() {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-            </div>
+            </form>
           </div>
 
           {/* ハンバーガー（モバイル） */}
@@ -109,21 +112,24 @@ export default function Header() {
           id="mobile-menu"
           className="hidden md:hidden pb-4 border-t border-stone-100 mt-2 pt-4"
         >
-          <div className="relative mb-4">
+          <form action="/blog-list" method="get" className="relative mb-4">
             <label htmlFor="mobile-search" className="sr-only">
               記事を検索
             </label>
             <input
               id="mobile-search"
+              name="q"
               type="search"
-              placeholder="記事を検索..."
-              className="w-full pl-9 pr-4 py-2.5 text-sm bg-stone-100 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+              placeholder="記事を検索…（スペース区切りで OR）"
+              autoComplete="off"
+              className="w-full pl-9 pr-4 py-2.5 text-sm bg-stone-100 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 transition text-gray-900"
             />
             <svg
-              className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden
             >
               <path
                 strokeLinecap="round"
@@ -132,7 +138,7 @@ export default function Header() {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-          </div>
+          </form>
           <nav
             className="flex flex-col gap-1"
             aria-label="モバイルナビゲーション"

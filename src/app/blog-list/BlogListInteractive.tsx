@@ -36,10 +36,11 @@ export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
   /** 複数選択 · いずれかのタグが付いた記事に一致（OR）。`?tag=` で初期化 */
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  /** `?tag=` / `?genre=` を URL と同期（クエリが無い項目はフィルタ解除） */
+  /** `?tag=` / `?genre=` / `?q=` を URL と同期（クエリが無い項目はフィルタ解除） */
   useEffect(() => {
     const tagRaw = searchParams.get("tag");
     const genreRaw = searchParams.get("genre");
+    const qRaw = searchParams.get("q");
 
     if (tagRaw) {
       try {
@@ -61,6 +62,14 @@ export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
       }
     } else {
       setSelectedGenre(null);
+    }
+
+    if (qRaw !== null) {
+      try {
+        setQuery(decodeURIComponent(qRaw));
+      } catch {
+        setQuery(qRaw);
+      }
     }
   }, [searchParams]);
 
