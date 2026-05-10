@@ -75,6 +75,153 @@ body {
   background: transparent;
 }
 
+/* Blog article body (markdown HTML: blank-line paragraphs, ##, - lists) */
+.prose-custom > *:first-child {
+  margin-top: 0;
+}
+
+.prose-custom h2 {
+  font-family: var(--font-kosugi-maru), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #d1fae5;
+  line-height: 1.5;
+}
+
+.prose-custom > h2:first-child {
+  margin-top: 0;
+}
+
+.prose-custom h3 {
+  font-family: var(--font-kosugi-maru), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid #16a34a;
+  line-height: 1.5;
+}
+
+.prose-custom p {
+  font-size: 0.9375rem;
+  color: #ffffff;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.prose-custom ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+
+.prose-custom ul li {
+  font-size: 0.9375rem;
+  color: #ffffff;
+  line-height: 1.8;
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+.prose-custom ul li::before {
+  content: "●";
+  color: #16a34a;
+  font-size: 0.5rem;
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+}
+
+/* 入れ子の箇条書き（- の直下にさらに - ） */
+.prose-custom ul ul,
+.prose-custom ol ul {
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.prose-custom ul ul li::before,
+.prose-custom ol ul li::before {
+  content: "◆";
+  font-size: 0.45rem;
+  top: 0.6rem;
+  color: #22c55e;
+}
+
+/* 太いリスト（項目内に空行があり <p> で包まれる場合） */
+.prose-custom li > p {
+  margin: 0 0 0.4rem;
+}
+
+.prose-custom li > p:last-child {
+  margin-bottom: 0;
+}
+
+/* 番号付きリスト */
+.prose-custom ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.prose-custom ol li {
+  font-size: 0.9375rem;
+  color: #ffffff;
+  line-height: 1.8;
+  margin-bottom: 0.4rem;
+  padding-left: 0.25rem;
+}
+
+.prose-custom ol li::marker {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.prose-custom blockquote {
+  border-left: 4px solid #6ee7b7;
+  background: #f0fdf4;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.prose-custom strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.toc-link {
+  transition:
+    color 0.15s ease,
+    padding-left 0.15s ease;
+}
+
+.toc-link:hover {
+  color: #16a34a;
+  padding-left: 0.25rem;
+}
+
+.card-hover {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
 /* Liquid Glass Card */
 .liquid-glass-card {
   position: relative;
