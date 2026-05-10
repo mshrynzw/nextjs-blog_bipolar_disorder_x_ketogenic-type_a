@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Kosugi_Maru, LINE_Seed_JP } from "next/font/google";
 import { absoluteUrl, getSiteAuthor, getSiteUrl } from "@/src/lib/site";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -83,6 +84,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
