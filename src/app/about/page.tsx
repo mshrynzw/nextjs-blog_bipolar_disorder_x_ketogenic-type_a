@@ -99,7 +99,7 @@ export default function About() {
                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         />
                       </svg>
-                      2024年9月〜実践中
+                      2026年4月〜実践中
                     </span>
                   </div>
                 </div>
@@ -110,7 +110,7 @@ export default function About() {
                 双極性障害2型と診断されて7年が経ちます。この数年は薬物療法を続けながら、日常生活を安定させることに取り組んできました。
               </p>
               <p>
-                2024年の夏、ケトジェニックダイエット（糖質制限食）が双極症の症状改善に関係するという海外の研究論文を読んで興味を持ちました。主治医に相談した上で2024年9月から実践を開始し、その記録をこのブログにまとめています。
+                2024年の夏、ケトジェニックダイエット（糖質制限食）が双極症の症状改善に関係するという海外の研究論文を読んで興味を持ちました。主治医に相談した上で2026年4月から実践を開始し、その記録をこのブログにまとめています。
               </p>
               <p>
                 医療の専門家ではありません。書いていることはすべて個人の体験記録です。同じ病気を抱える方への情報提供や、「ひとりじゃないよ」というメッセージになれば嬉しいです。
@@ -280,7 +280,7 @@ export default function About() {
         </section>
 
         {/* お問い合わせ */}
-        <section id="contact" aria-labelledby="contact-heading">
+        {/* <section id="contact" aria-labelledby="contact-heading">
           <LiquidGlassPanel className="p-6 sm:p-8 text-white/85 bg-stone-50/25 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center flex-shrink-0">
@@ -443,7 +443,7 @@ export default function About() {
               </button>
             </form>
           </LiquidGlassPanel>
-        </section>
+        </section> */}
       </div>
     </>
   );

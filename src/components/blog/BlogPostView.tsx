@@ -21,7 +21,8 @@ export default function BlogPostView({
   related: PostListItem[];
 }) {
   const { frontmatter, html, readingMinutes, toc } = post;
-  const authorInitial = frontmatter.author.trim().charAt(0).toUpperCase();
+  const authorInitial =
+    frontmatter.author.trim().charAt(0).toUpperCase() || "?";
 
   return (
     <>

@@ -64,38 +64,56 @@ function readPostsDir(): string[] {
   return fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".md"));
 }
 
+/** `getAllPostsMeta` と同じ条件で有効な記事だけを静的生成対象にする */
 export function getPostSlugs(): string[] {
-  const slugs: string[] = [];
-  for (const file of readPostsDir()) {
-    const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
-    const { data } = matter(raw);
-    const fm = data as Partial<PostFrontmatter>;
-    slugs.push(fm.slug ?? file.replace(/\.md$/, ""));
-  }
-  return slugs;
+  return getAllPostsMeta().map((p) => p.slug);
 }
 
 export type PostListItem = {
   slug: string;
   publishedAt: string;
+  updatedAt?: string;
   title: string;
   genre: string;
+  tags: string[];
+  description: string;
 };
+
+export function getLatestPostTimestamp(posts: PostListItem[]): number {
+  let max = 0;
+  for (const p of posts) {
+    const t = new Date(p.updatedAt ?? p.publishedAt).getTime();
+    if (t > max) max = t;
+  }
+  return max;
+}
 
 export function getAllPostsMeta(): PostListItem[] {
   const items: PostListItem[] = [];
   for (const file of readPostsDir()) {
-    const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
-    const { data } = matter(raw);
-    const fm = data as Partial<PostFrontmatter>;
-    const slug = fm.slug ?? file.replace(/\.md$/, "");
-    if (fm.title && fm.publishedAt) {
+    let raw: string;
+    try {
+      raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
+      const { data } = matter(raw);
+      const fm = data as Partial<PostFrontmatter>;
+      const slug = fm.slug ?? file.replace(/\.md$/, "");
+      if (!fm.title || !fm.publishedAt) continue;
+
+      const tags = Array.isArray(fm.tags)
+        ? fm.tags.filter((t): t is string => typeof t === "string")
+        : [];
+
       items.push({
         slug,
         publishedAt: fm.publishedAt,
+        updatedAt: fm.updatedAt,
         title: fm.title,
         genre: fm.genre ?? "記事",
+        tags,
+        description: fm.description ?? "",
       });
+    } catch {
+      continue;
     }
   }
   items.sort(
@@ -113,16 +131,35 @@ export function getDefaultPostSlug(): string | null {
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   for (const file of readPostsDir()) {
     const fullPath = path.join(POSTS_DIR, file);
-    const raw = fs.readFileSync(fullPath, "utf8");
+    let raw: string;
+    try {
+      raw = fs.readFileSync(fullPath, "utf8");
+    } catch {
+      continue;
+    }
     const { data, content } = matter(raw);
-    const fm = data as PostFrontmatter;
+    const fm = data as Partial<PostFrontmatter>;
     const resolvedSlug = fm.slug ?? file.replace(/\.md$/, "");
     if (resolvedSlug !== slug) continue;
+    if (!fm.title || !fm.publishedAt) continue;
+
+    const frontmatter: PostFrontmatter = {
+      title: fm.title,
+      slug: resolvedSlug,
+      publishedAt: fm.publishedAt,
+      updatedAt: fm.updatedAt,
+      genre: fm.genre ?? "記事",
+      tags: Array.isArray(fm.tags)
+        ? fm.tags.filter((t): t is string => typeof t === "string")
+        : [],
+      author: fm.author ?? "",
+      description: fm.description ?? "",
+    };
 
     const html = await markdownToHtml(content);
     return {
       slug: resolvedSlug,
-      frontmatter: fm,
+      frontmatter,
       content,
       html,
       readingMinutes: estimateReadingMinutes(content),
