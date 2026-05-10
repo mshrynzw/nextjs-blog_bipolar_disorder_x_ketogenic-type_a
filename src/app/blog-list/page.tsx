@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { BlogListInteractive } from "./BlogListInteractive";
 import { formatFullDate } from "@/src/lib/dateFormat";
 import {
@@ -59,11 +60,19 @@ export default function BlogList() {
         </div>
       </div>
 
-      <BlogListInteractive
-        posts={posts}
-        genres={genres}
-        tagsSorted={tagsSorted}
-      />
+      <Suspense
+        fallback={
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center text-sm text-gray-500">
+            読み込み中…
+          </div>
+        }
+      >
+        <BlogListInteractive
+          posts={posts}
+          genres={genres}
+          tagsSorted={tagsSorted}
+        />
+      </Suspense>
     </>
   );
 }

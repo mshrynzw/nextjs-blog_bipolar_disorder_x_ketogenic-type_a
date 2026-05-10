@@ -123,6 +123,20 @@ export function getAllPostsMeta(): PostListItem[] {
   return items;
 }
 
+const MS_PER_DAY = 86_400_000;
+
+/**
+ * 公開日が最も早い記事から、公開日が最も新しい記事までの経過日数。
+ * 記事が 1 件のみのときは 0。記事が無いときは null。
+ */
+export function getPublishedSpanDays(posts: PostListItem[]): number | null {
+  if (posts.length === 0) return null;
+  const times = posts.map((p) => new Date(p.publishedAt).getTime());
+  const min = Math.min(...times);
+  const max = Math.max(...times);
+  return Math.floor((max - min) / MS_PER_DAY);
+}
+
 export function getDefaultPostSlug(): string | null {
   const meta = getAllPostsMeta();
   return meta[0]?.slug ?? null;
