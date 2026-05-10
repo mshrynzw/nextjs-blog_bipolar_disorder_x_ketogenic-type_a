@@ -38,11 +38,9 @@ export const metadata: Metadata = {
   description:
     "双極症とケトジェニックについてのブログです。双極症当事者の目線から、双極症とケトジェニックについての情報を提供しています。医師の視点からも情報を提供しています。",
   keywords: ["双極症", "双極性障害", "躁うつ病", "ケトジェニック", "ブログ"],
-  authors: [
-    { name: "双極症とケトジェニック", url: "https://bipolar-ketogenic.com" },
-  ],
-  creator: "双極症とケトジェニック",
-  publisher: "双極症とケトジェニック",
+  authors: [{ name: "keto_bipolar", url: "https://bipolar-ketogenic.com" }],
+  creator: "keto_bipolar",
+  publisher: "keto_bipolar",
   openGraph: {
     title: "双極症とケトジェニック",
     description:
