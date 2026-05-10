@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Kosugi_Maru, LINE_Seed_JP } from "next/font/google";
+import { absoluteUrl, getSiteAuthor, getSiteUrl } from "@/src/lib/site";
 import "../globals.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -38,18 +39,18 @@ export const metadata: Metadata = {
   description:
     "双極症とケトジェニックについてのブログです。双極症当事者の目線から、双極症とケトジェニックについての情報を提供しています。医師の視点からも情報を提供しています。",
   keywords: ["双極症", "双極性障害", "躁うつ病", "ケトジェニック", "ブログ"],
-  authors: [{ name: "keto_bipolar", url: "https://bipolar-ketogenic.com" }],
-  creator: "keto_bipolar",
-  publisher: "keto_bipolar",
+  authors: [{ name: getSiteAuthor(), url: getSiteUrl() }],
+  creator: getSiteAuthor(),
+  publisher: getSiteAuthor(),
   openGraph: {
     title: "双極症とケトジェニック",
     description:
       "双極症とケトジェニックについてのブログです。双極症当事者の目線から、双極症とケトジェニックについての情報を提供しています。医師の視点からも情報を提供しています。",
-    url: "https://bipolar-ketogenic.com",
+    url: getSiteUrl(),
     siteName: "双極症とケトジェニック",
     images: [
       {
-        url: "https://bipolar-ketogenic.com/ogp.png",
+        url: absoluteUrl("/ogp.png"),
         width: 1200,
         height: 630,
         alt: "双極症とケトジェニック",
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
     title: "双極症とケトジェニック",
     description:
       "双極症とケトジェニックについてのブログです。双極症当事者の目線から、双極症とケトジェニックについての情報を提供しています。医師の視点からも情報を提供しています。",
-    images: ["https://bipolar-ketogenic.com/ogp.png"],
+    images: [absoluteUrl("/ogp.png")],
   },
 };
 

@@ -1,6 +1,12 @@
 import { LiquidGlassPanel } from "../../components/LiquidGlassPanel";
+import Link from "next/link";
+import { getSiteAuthor } from "@/src/lib/site";
 
 export default function About() {
+  const siteAuthor = getSiteAuthor();
+  const authorInitial =
+    siteAuthor.trim().charAt(0).toUpperCase() || "?";
+
   return (
     <>
       {/* ページヘッダー */}
@@ -10,9 +16,9 @@ export default function About() {
             className="flex items-center gap-2 text-xs text-gray-400 mb-4"
             aria-label="パンくずリスト"
           >
-            <a href="index.html" className="hover:text-gray-600 transition">
+            <Link href="/" className="hover:text-gray-600 transition">
               Home
-            </a>
+            </Link>
             <svg
               className="w-3 h-3"
               fill="none"
@@ -47,7 +53,7 @@ export default function About() {
                 <div className="flex-shrink-0">
                   <div className="w-20 h-20 rounded-2xl bg-white/20 border-2 border-white/40 shadow-sm flex items-center justify-center">
                     <span className="text-3xl font-bold text-white font-kosugi-maru">
-                      K
+                      {authorInitial}
                     </span>
                   </div>
                 </div>
@@ -57,7 +63,7 @@ export default function About() {
                     id="about-author"
                     className="font-kosugi-maru text-xl font-bold text-white mb-1"
                   >
-                    keto_bipolar
+                    {siteAuthor}
                   </h2>
                   <p className="text-sm text-green-100 font-medium mb-3">
                     双極性障害当事者・ブログ運営者
@@ -415,9 +421,9 @@ export default function About() {
                   htmlFor="agree"
                   className="text-xs text-white/75 leading-relaxed cursor-pointer"
                 >
-                  <a href="#privacy" className="text-green-300 hover:underline">
+                  <Link href="#privacy" className="text-green-300 hover:underline">
                     プライバシーポリシー
-                  </a>
+                  </Link>
                   に同意した上で送信します。
                 </label>
               </div>

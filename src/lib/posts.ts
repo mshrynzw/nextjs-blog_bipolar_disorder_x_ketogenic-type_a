@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import GithubSlugger from "github-slugger";
+import { getSiteAuthor } from "@/src/lib/site";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
@@ -166,7 +167,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       tags: Array.isArray(fm.tags)
         ? fm.tags.filter((t): t is string => typeof t === "string")
         : [],
-      author: fm.author ?? "",
+      author:
+        (typeof fm.author === "string" ? fm.author.trim() : "") ||
+        getSiteAuthor(),
       description: fm.description ?? "",
     };
 

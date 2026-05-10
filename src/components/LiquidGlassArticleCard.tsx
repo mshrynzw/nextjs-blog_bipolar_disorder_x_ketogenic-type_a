@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export type LiquidGlassArticleCardProps = {
@@ -30,7 +31,7 @@ function ReadMoreLink({
   featured?: boolean;
 }) {
   return (
-    <a
+    <Link
       href={href}
       className={
         featured
@@ -56,7 +57,7 @@ function ReadMoreLink({
           d="M17 8l4 4m0 0l-4 4m4-4H3"
         />
       </svg>
-    </a>
+    </Link>
   );
 }
 
@@ -109,7 +110,7 @@ export function LiquidGlassArticleCard({
         <div className={bodyPad}>
           {meta}
           <HeadingTag className={titleClass}>
-            <a href={href}>{title}</a>
+            <Link href={href}>{title}</Link>
           </HeadingTag>
           <p className={descClass}>{description}</p>
           {tags}

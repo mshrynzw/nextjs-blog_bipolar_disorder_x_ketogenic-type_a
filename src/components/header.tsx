@@ -3,9 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  const mobileNavInactive =
+    "px-3 py-2 rounded-lg text-sm font-medium text-gray-100 hover:bg-stone-100";
+  const mobileNavActive =
+    "px-3 py-2 rounded-lg text-sm font-medium text-green-700 bg-green-50";
+
+  const blogSectionActive =
+    pathname === "/blog-list" || pathname.startsWith("/blog-detail");
 
   return (
     <header className="bg-gray-900/90 text-gray-400 backdrop-blur-sm sticky top-0 z-50">
@@ -16,6 +28,7 @@ export default function Header() {
             href="/"
             className="flex items-center gap-2 group"
             aria-label="トップへ"
+            onClick={closeMobileMenu}
           >
             <Image
               src="/images/logo.webp"
@@ -63,7 +76,7 @@ export default function Header() {
                 id="header-search"
                 name="q"
                 type="search"
-                placeholder="記事を検索…（スペース区切りで OR）"
+                placeholder="記事を検索…"
                 autoComplete="off"
                 className="w-52 pl-9 pr-4 py-2 text-sm bg-stone-100 border border-stone-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white transition text-gray-900"
               />
@@ -87,9 +100,12 @@ export default function Header() {
           {/* ハンバーガー（モバイル） */}
           <button
             id="menu-btn"
+            type="button"
             className="md:hidden p-2 rounded-lg hover:bg-stone-100 transition"
-            aria-label="メニューを開く"
-            aria-expanded="false"
+            aria-label={mobileMenuOpen ? "メニューを閉じる" : "メニューを開く"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMobileMenuOpen((open) => !open)}
           >
             <svg
               className="w-5 h-5 text-gray-700"
@@ -110,9 +126,15 @@ export default function Header() {
         {/* モバイルメニュー */}
         <div
           id="mobile-menu"
-          className="hidden md:hidden pb-4 border-t border-stone-100 mt-2 pt-4"
+          hidden={!mobileMenuOpen}
+          className="md:hidden pb-4 border-t border-stone-100 mt-2 pt-4"
         >
-          <form action="/blog-list" method="get" className="relative mb-4">
+          <form
+            action="/blog-list"
+            method="get"
+            className="relative mb-4"
+            onSubmit={closeMobileMenu}
+          >
             <label htmlFor="mobile-search" className="sr-only">
               記事を検索
             </label>
@@ -145,19 +167,29 @@ export default function Header() {
           >
             <Link
               href="/"
-              className="px-3 py-2 rounded-lg text-sm font-medium text-green-700 bg-green-50"
+              className={pathname === "/" ? mobileNavActive : mobileNavInactive}
+              onClick={closeMobileMenu}
+              aria-current={pathname === "/" ? "page" : undefined}
             >
               Home
             </Link>
             <Link
               href="/blog-list"
-              className="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-stone-100"
+              className={
+                blogSectionActive ? mobileNavActive : mobileNavInactive
+              }
+              onClick={closeMobileMenu}
+              aria-current={blogSectionActive ? "page" : undefined}
             >
               Blog
             </Link>
             <Link
               href="/about"
-              className="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-stone-100"
+              className={
+                pathname === "/about" ? mobileNavActive : mobileNavInactive
+              }
+              onClick={closeMobileMenu}
+              aria-current={pathname === "/about" ? "page" : undefined}
             >
               About
             </Link>
