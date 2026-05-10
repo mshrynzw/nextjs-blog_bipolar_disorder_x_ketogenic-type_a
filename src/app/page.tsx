@@ -181,9 +181,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recentPosts.map((post, index) => {
                 const v =
-                  ARTICLE_CARD_VARIANTS[
-                    index % ARTICLE_CARD_VARIANTS.length
-                  ]!;
+                  ARTICLE_CARD_VARIANTS[index % ARTICLE_CARD_VARIANTS.length]!;
                 const href = `/blog-detail/${post.slug}`;
 
                 return (
@@ -257,7 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* カテゴリセクション */}
+      {/* ジャンルセクション */}
       <section
         className="py-14 bg-white/40 backdrop-blur-sm"
         aria-labelledby="categories-heading"
@@ -267,7 +265,7 @@ export default function Home() {
             id="categories-heading"
             className="font-kosugi-maru text-xl sm:text-2xl font-bold text-white/90 mb-8 text-center"
           >
-            カテゴリから探す
+            ジャンルから探す
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             <Link

@@ -110,7 +110,7 @@ export default function About() {
                 双極性障害2型と診断されて7年が経ちます。この数年は薬物療法を続けながら、日常生活を安定させることに取り組んできました。
               </p>
               <p>
-                2024年の夏、ケトジェニックダイエット（糖質制限食）が双極症の症状改善に関係するという海外の研究論文を読んで興味を持ちました。主治医に相談した上で2026年4月から実践を開始し、その記録をこのブログにまとめています。
+                2024年の夏、ケトジェニックダイエット（糖質制限食）が双極症の症状改善に関係するという海外の研究論文を読んで興味を持ちました。2026年4月から実践を開始し、その記録をこのブログにまとめています。
               </p>
               <p>
                 医療の専門家ではありません。書いていることはすべて個人の体験記録です。同じ病気を抱える方への情報提供や、「ひとりじゃないよ」というメッセージになれば嬉しいです。
@@ -165,7 +165,7 @@ export default function About() {
 
             <div className="mt-6 pt-6 border-t border-white/15">
               <h3 className="font-kosugi-maru text-base font-bold text-white mb-4">
-                記事のカテゴリ
+                記事のジャンル
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 <div className="flex items-center gap-2 p-3 bg-white/10 border border-white/15 rounded-xl">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { LiquidGlassArticleCard } from "../../components/LiquidGlassArticleCard";
@@ -25,8 +26,7 @@ const tagBtnBase =
   "text-xs px-2.5 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-green-400";
 const tagBtnInactive =
   "text-gray-600 border-transparent bg-stone-100 hover:bg-stone-200";
-const tagBtnActive =
-  "border-green-600 bg-green-50 text-green-800 font-medium";
+const tagBtnActive = "border-green-600 bg-green-50 text-green-800 font-medium";
 
 export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
   const searchParams = useSearchParams();
@@ -91,7 +91,7 @@ export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
 
   return (
     <>
-      <div className="bg-white/40 backdrop-blur-sm sticky top-16 z-40 shadow-sm">
+      <div className="bg-white/40 backdrop-blur-sm top-16 z-40 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
           <div className="max-w-lg mb-4">
             <label
@@ -128,11 +128,11 @@ export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
           </div>
 
           <div className="mb-3">
-            <p className="text-xs font-medium text-gray-900 mb-2">カテゴリ</p>
+            <p className="text-xs font-medium text-gray-900 mb-2">ジャンル</p>
             <div
               className="flex flex-wrap gap-2"
               role="group"
-              aria-label="カテゴリフィルター"
+              aria-label="ジャンルフィルター"
             >
               <button
                 type="button"
@@ -215,9 +215,7 @@ export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((post, index) => {
                 const v =
-                  ARTICLE_CARD_VARIANTS[
-                    index % ARTICLE_CARD_VARIANTS.length
-                  ]!;
+                  ARTICLE_CARD_VARIANTS[index % ARTICLE_CARD_VARIANTS.length]!;
                 const href = `/blog-detail/${post.slug}`;
 
                 return (
@@ -233,11 +231,12 @@ export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
                     icon={v.icon}
                     meta={
                       <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span
-                          className={`text-xs font-medium px-2.5 py-1 rounded-full ${v.chip}`}
+                        <Link
+                          href={`/blog-list?genre=${encodeURIComponent(post.genre)}`}
+                          className={`text-xs font-medium px-2.5 py-1 rounded-full transition hover:opacity-90 ${v.chip}`}
                         >
                           {post.genre}
-                        </span>
+                        </Link>
                         <time
                           className="ml-auto text-xs text-gray-400"
                           dateTime={post.publishedAt}
@@ -250,12 +249,13 @@ export function BlogListInteractive({ posts, genres, tagsSorted }: Props) {
                       post.tags.length > 0 ? (
                         <div className="flex flex-wrap gap-1 mb-4">
                           {post.tags.slice(0, 6).map((tag) => (
-                            <span
+                            <Link
                               key={tag}
-                              className="text-xs text-gray-900 bg-stone-100 px-2 py-0.5 rounded-full"
+                              href={`/blog-list?tag=${encodeURIComponent(tag)}`}
+                              className="text-xs text-gray-900 bg-stone-100 px-2 py-0.5 rounded-full hover:bg-stone-200 transition inline-block"
                             >
                               #{tag}
-                            </span>
+                            </Link>
                           ))}
                         </div>
                       ) : undefined

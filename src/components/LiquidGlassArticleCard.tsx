@@ -13,7 +13,7 @@ export type LiquidGlassArticleCardProps = {
   icon: ReactNode;
   /** ヘッダー内、アイコン直下の補足（フィーチャード向け） */
   headerSubtitle?: ReactNode;
-  /** カテゴリ・日付・タグ等の先頭行 */
+  /** ジャンル・日付・タグ等の先頭行 */
   meta: ReactNode;
   title: string;
   href: string;
